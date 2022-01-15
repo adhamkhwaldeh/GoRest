@@ -1,7 +1,7 @@
 //version constants for the Kotlin DSL dependencies
 object Versions {
     //app level
-    const val gradle = "4.2.1"
+    const val gradle = "7.0.0-alpha03"
     const val kotlin = "1.4.32"
     const val nav_version = "2.3.4"
 

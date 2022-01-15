@@ -17,6 +17,11 @@ android {
         versionName(AppConfig.versionName)
         multiDexEnabled = true
 
+        //TODO: remove this after migration to Hilt
+        javaCompileOptions.annotationProcessorOptions.arguments["dagger.hilt.disableModulesHaveInstallInCheck"] =
+            "true"
+
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -59,6 +64,13 @@ android {
     kapt {
         correctErrorTypes = true
     }
+
+    //TODO: remove this after migration to Hilt
+//    javaCompileOptions {
+//        annotationProcessorOptions.arguments["dagger.hilt.disableModulesHaveInstallInCheck"] =
+//            "true"
+//    }
+
 //    hilt {
 //        enableAggregatingTask = true
 //    }
@@ -86,11 +98,13 @@ android {
 //    }
 }
 
+
 dependencies {
     implementation(AppDependencies.coroutinesLibrary)
     implementation(AppDependencies.appLibraries)
     implementation(AppDependencies.retrofitLibraries)
     implementation(AppDependencies.pagingLibrary)
+
     //region Dagger Hilt
     implementation(AppDependencies.hiltLibrary)
     kapt(AppDependencies.hilAndroidCompiler)
