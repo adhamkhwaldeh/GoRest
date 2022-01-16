@@ -9,7 +9,6 @@ abstract class BaseFlowUseCase<out Type, in Params>() {
 
     suspend operator fun invoke(params: Params): Flow<BaseState<Type>> {
         return run(params)
-
     }
 
     class None

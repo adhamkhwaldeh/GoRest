@@ -12,12 +12,12 @@ class UserRepository @Inject constructor(
     private var apiService: UserApi
 ) {
 
-    fun createUser(userModel: UserModel): Flow<BaseState<UserModel>> {
+    suspend fun createUser(userModel: UserModel): Flow<BaseState<UserModel>> {
         return requestBlockingById { apiService.createUser(userModel) }
     }
 
-    fun deleteUser(userId: Int): Flow<BaseState<Void>> {
-        return requestBlockingById { apiService.deleteUser(userId) }
+    suspend fun deleteUser(userId: Int): Flow<BaseState<Any?>> {
+        return requestBlockingById<Any?>(flowable = { apiService.deleteUser(userId) })
     }
 
 }

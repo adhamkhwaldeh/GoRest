@@ -14,7 +14,7 @@
         android:theme="@style/Theme.GoRest">
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.aljawad.sons.goRestCore.ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.GoRest.NoActionBar">
             <intent-filter>

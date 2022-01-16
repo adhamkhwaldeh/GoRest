@@ -5,24 +5,27 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.aljawad.sons.business.CreateUserUseCase
+import com.aljawad.sons.business.DeleteUserUseCase
 import com.aljawad.sons.dtos.models.UserModel
 import com.aljawad.sons.gorestrepository.paging.PagingParamConfig
 import com.aljawad.sons.gorestrepository.repositories.UserPagingRepository
 import com.aljawad.sons.mainlibrary.states.BaseState
-import com.aljawad.sons.business.CreateUserUseCase
-import com.aljawad.sons.business.DeleteUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class UseViewModel @Inject constructor(
     private val userPagingRepository: UserPagingRepository,
-    private val createUserUseCase: com.aljawad.sons.business.CreateUserUseCase,
-    private val deleteUserUseCase: com.aljawad.sons.business.DeleteUserUseCase,
+    private val createUserUseCase: CreateUserUseCase,
+    private val deleteUserUseCase: DeleteUserUseCase,
     private val handle: SavedStateHandle
 ) : com.aljawad.sons.mainlibrary.base.BaseViewModel() {
 
@@ -33,13 +36,12 @@ class UseViewModel @Inject constructor(
 
     var payload = handle.getLiveData(
         "payload",
-        com.aljawad.sons.gorestrepository.paging.PagingParamConfig.initialOffset
+        PagingParamConfig.initialOffset
     )
 
     private var _payloadPointer = payload.value!!
     var refreshWithFilter: MutableLiveData<Boolean> = MutableLiveData()
 
-    //    @ExperimentalPagingApi
     fun getUserList() = launchPagingAsync({
         userPagingRepository.getUserPageList(_payloadPointer)
     }, { flow ->
@@ -78,15 +80,15 @@ class UseViewModel @Inject constructor(
     //endregion
 
     //region delete user
-    private lateinit var _userDeleteFlow: Flow<BaseState<Void>>
-    val userDeleteFlow: Flow<BaseState<Void>>
+    private lateinit var _userDeleteFlow: Flow<BaseState<Any?>>
+    val userDeleteFlow: Flow<BaseState<Any?>>
         get() = _userDeleteFlow
 
     fun deleteUser(userId: Int) { //: Flow<BaseState>
         viewModelScope.launch {
             CoroutineScope(Dispatchers.IO)
                 .launch {
-                    _userDeleteFlow = deleteUserUseCase(userId)//.map { poKo -> poKo }
+                    _userDeleteFlow = deleteUserUseCase(userId).map { poKo -> poKo }
                 }
         }
     }

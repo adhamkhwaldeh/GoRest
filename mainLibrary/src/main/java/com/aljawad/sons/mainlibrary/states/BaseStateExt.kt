@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
-fun <T> requestBlockingById(flowable: suspend () -> T): Flow<BaseState<T>> = flow {
+suspend fun <T> requestBlockingById(flowable: suspend () -> T): Flow<BaseState<T>> = flow {
     this.emit(BaseState.Loading<T>())
     Result.runCatching { flowable.invoke() }.fold(
         onSuccess = {
@@ -13,7 +13,7 @@ fun <T> requestBlockingById(flowable: suspend () -> T): Flow<BaseState<T>> = flo
         },
         onFailure = { ex ->
             this.emit(BaseState.LoadingDismiss<T>())
-//            this.emit(BaseState.getStateByThrowable<T>(ex, ApiService.retrofit))
+            this.emit(BaseState.getStateByThrowable<T>(ex))
         },
     )
 }

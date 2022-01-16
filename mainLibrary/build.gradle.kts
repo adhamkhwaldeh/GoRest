@@ -35,6 +35,8 @@ plugins {
 
 dependencies {
     implementation(AppDependencies.appLibraries)
+    implementation(AppDependencies.customLibs)
+
     implementation(AppDependencies.retrofitLibraries)
 
     implementation(project(":dtos"))

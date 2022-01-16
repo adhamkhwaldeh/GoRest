@@ -18,10 +18,10 @@ dependencies {
     //endregion
 
     implementation(project(":dtos"))
-
     implementation(project(":goRestRepository"))
     implementation(project(":mainLibrary"))
     implementation(project(":business"))
+    implementation(project(":dataBindingValidationLibrary"))
 
 
 //    testImplementation 'junit:junit:4.+'

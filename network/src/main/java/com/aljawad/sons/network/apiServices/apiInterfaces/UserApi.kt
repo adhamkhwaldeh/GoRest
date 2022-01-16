@@ -2,6 +2,7 @@ package com.aljawad.sons.network.apiServices.apiInterfaces
 
 import com.aljawad.sons.dtos.models.UserModel
 import com.aljawad.sons.dtos.response.UserListResponse
+import retrofit2.Response
 import retrofit2.http.*
 
 interface UserApi {
@@ -13,7 +14,7 @@ interface UserApi {
     suspend fun createUser(@Body body: UserModel): UserModel
 
     @DELETE("users/{userId}")
-    suspend fun deleteUser(@Path("userId") userId: Int): Void
+    suspend fun deleteUser(@Path("userId") userId: Int): Response<Unit>
 
 
 }

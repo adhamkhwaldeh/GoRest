@@ -5,6 +5,7 @@ import com.aljawad.sons.network.apiServices.apiInterfaces.UserApi
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.tatweer.rwandacore.apiServices.interceptors.HeaderRequestInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,7 +44,7 @@ class NetworkModule {
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient = OkHttpClient.Builder().apply {
         interceptors().add(httpLoggingInterceptor)
-//        interceptors().add(HeaderRequestInterceptor(sharedPreferenceRepository))
+        interceptors().add(HeaderRequestInterceptor())
 //        interceptors().add(NetworkConnectionInterceptor(context))
     }.build()
 

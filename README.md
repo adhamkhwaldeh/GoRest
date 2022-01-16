@@ -45,10 +45,12 @@ This module is on the bottom layer of the project. Dealing with repository $ Dat
 
 
 
-## footballMatch (Main Functionality of app Resides Here)
-In this module we are presenting the applications main functionality where we are showcasing the list of football match results data . This module have dependency on business, common, dtos
+## goRestCore (Main Functionality of app Resides Here)
+In this module we are presenting the applications main functionality where we are showcasing the list of users , create and delete users. This module have dependency on business, common, dtos
 ###### Purpose
-1. Display football match  list data
+1. Display user list
+2. Create user
+3. Delete user
 
 ## goRestRepository
 This module contains footballMatch Repo layer to fetch data from any source either remote or local dat source based on network availability

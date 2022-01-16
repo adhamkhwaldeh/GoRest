@@ -8,6 +8,7 @@ plugins {
 dependencies {
     implementation(AppDependencies.appLibraries)
     implementation(AppDependencies.pagingLibrary)
+    implementation(AppDependencies.retrofitLibraries)
 
     //region Dagger Hilt
     implementation(AppDependencies.hiltLibrary)

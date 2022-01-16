@@ -20,16 +20,19 @@
         <!--        android:layout_marginBottom="@dimen/padding_sm"-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/attendanceTitleContainer"
+                android:id="@+id/nameContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/attendanceTotalWorkTextView"
+                    android:id="@+id/nameTextView"
+                    style="@style/Theme.GoRest.TitleText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -40,189 +43,58 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Total working hour 08 :20" />
 
+                <!--                    android:background="@android:drawable/presence_online"-->
+
+                <View
+                    android:id="@+id/statusTextView"
+                    style="@style/Theme.GoRest.NormalText"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@android:drawable/presence_offline"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:userStatus="@{item.status}"
+                    tools:text="Total working hour 08 :20" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/nameContainer">
 
-            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                android:id="@+id/attendanceTitleContainer"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:background="@color/colorPrimary"-->
-            <!--                app:layout_constraintTop_toTopOf="parent">-->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/emailTextView"
+                    style="@style/Theme.GoRest.NormalText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{item.email}"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toStartOf="@+id/genderImageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="example@gmail.com" />
 
-            <!--                <androidx.appcompat.widget.AppCompatTextView-->
-            <!--                    android:id="@+id/attendanceTotalWorkTextView"-->
-            <!--                    style="@style/AppTheme.HeaderTextView.White"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_margin="@dimen/margin_Md"-->
-            <!--                    android:ellipsize="end"-->
-            <!--                    android:maxLines="1"-->
-            <!--                    android:paddingBottom="@dimen/padding_Md"-->
-            <!--                    android:textStyle="normal"-->
-            <!--                    app:attendanceTotalWork="@{attendanceItem}"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent"-->
-            <!--                    tools:text="Total working hour 08 :20" />-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/genderImageView"
+                    style="@style/Theme.GoRest.NormalText"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:userGender="@{item.gender}"
+                    tools:text="Total working hour 08 :20" />
 
-            <!--                &lt;!&ndash;                app:layout_constraintEnd_toStartOf="@+id/attendanceShiftTextView"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                <TextView&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    android:id="@+id/attendanceShiftTextView"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    style="@style/AppTheme.CaptionTextView"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    android:layout_marginEnd="@dimen/margin_Lg"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    android:visibility="gone"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    app:layout_constraintTop_toTopOf="parent"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                    tools:text="Shift  A" />&ndash;&gt;-->
-
-            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                android:id="@+id/attendanceContentContainer"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/attendanceTitleContainer">-->
-
-            <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                    android:id="@+id/dateContainer"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    app:layout_constraintEnd_toStartOf="@+id/separator"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent">-->
-
-            <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                        app:layout_constraintStart_toStartOf="parent"-->
-            <!--                        app:layout_constraintTop_toTopOf="parent">-->
-
-            <!--                        <TextView-->
-            <!--                            android:id="@+id/attendanceDayTextView"-->
-            <!--                            style="@style/AppTheme.LargeTextView"-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            app:attendanceDay="@{attendanceItem}"-->
-            <!--                            app:layout_constraintStart_toStartOf="parent"-->
-            <!--                            app:layout_constraintTop_toTopOf="parent"-->
-            <!--                            tools:text="05" />-->
-
-            <!--                        <TextView-->
-            <!--                            android:id="@+id/attendanceMonthYearTextView"-->
-            <!--                            style="@style/AppTheme.NormalTextView.Grey.Bold"-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            app:attendanceMonthYear="@{attendanceItem}"-->
-            <!--                            app:layout_constraintStart_toStartOf="parent"-->
-            <!--                            app:layout_constraintTop_toBottomOf="@+id/attendanceDayTextView"-->
-            <!--                            tools:text="MAY/2020" />-->
-
-
-            <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-            <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-            <!--                <View-->
-            <!--                    android:id="@+id/separator"-->
-            <!--                    android:layout_width="@dimen/separator"-->
-            <!--                    android:layout_height="0dp"-->
-            <!--                    android:layout_margin="@dimen/margin_sm"-->
-            <!--                    android:background="@color/white"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintEnd_toStartOf="@+id/punchInContainer"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-            <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                    android:id="@+id/punchInContainer"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    app:layout_constraintEnd_toStartOf="@+id/punchOutContainer"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent"-->
-            <!--                    app:layout_constraintWidth_percent="0.35">-->
-
-            <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                        app:layout_constraintStart_toStartOf="parent"-->
-            <!--                        app:layout_constraintTop_toTopOf="parent">-->
-
-            <!--                        <TextView-->
-            <!--                            android:id="@+id/attendancePunchInTimeTextView"-->
-            <!--                            style="@style/AppTheme.LargeTextView"-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            app:attendancePunchInTime="@{attendanceItem}"-->
-            <!--                            app:layout_constraintStart_toStartOf="parent"-->
-            <!--                            app:layout_constraintTop_toTopOf="parent"-->
-            <!--                            tools:text="05" />-->
-
-            <!--                        <TextView-->
-            <!--                            android:id="@+id/attendancePunchInTimeLabel"-->
-            <!--                            style="@style/AppTheme.NormalTextView.Grey.Bold"-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            android:text="@string/CHECK_IN"-->
-            <!--                            app:layout_constraintStart_toStartOf="parent"-->
-            <!--                            app:layout_constraintTop_toBottomOf="@+id/attendancePunchInTimeTextView"-->
-            <!--                            tools:text="@string/CHECK_IN" />-->
-
-            <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-            <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-            <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                    android:id="@+id/punchOutContainer"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent"-->
-            <!--                    app:layout_constraintWidth_percent="0.35">-->
-
-            <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                        app:layout_constraintStart_toStartOf="parent"-->
-            <!--                        app:layout_constraintTop_toTopOf="parent">-->
-
-            <!--                        <TextView-->
-            <!--                            android:id="@+id/attendancePunchOutTimeTextView"-->
-            <!--                            style="@style/AppTheme.LargeTextView"-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            app:attendancePunchOutTime="@{attendanceItem}"-->
-            <!--                            app:layout_constraintStart_toStartOf="parent"-->
-            <!--                            app:layout_constraintTop_toTopOf="parent"-->
-            <!--                            tools:text="05" />-->
-
-            <!--                        <TextView-->
-            <!--                            android:id="@+id/attendancePunchOutTimeLabel"-->
-            <!--                            style="@style/AppTheme.NormalTextView.Grey.Bold"-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            android:text="@string/CHECK_OUT"-->
-            <!--                            app:layout_constraintStart_toStartOf="parent"-->
-            <!--                            app:layout_constraintTop_toBottomOf="@+id/attendancePunchOutTimeTextView"-->
-            <!--                            tools:text="@string/CHECK_OUT" />-->
-
-
-            <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-            <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,14 +1,18 @@
 package com.aljawad.sons.dtos.models
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import androidx.recyclerview.widget.DiffUtil
+import com.aljawad.sons.dtos.enums.GenderEnum
+import com.aljawad.sons.dtos.enums.StatusEnum
 
 data class UserModel(
-    var id: Int?,
-    var name: String?,
-    var email: String?,
-    var gender: String?,
-    var status: String?,
-) {
+    var id: Int? = null,
+    var name: String? = "",
+    var email: String? = "",
+    var gender: String? = GenderEnum.MALE.gender,
+    var status: String? = "",
+) : BaseObservable() {
 
     companion object {
         var diffUtil: DiffUtil.ItemCallback<UserModel> =
@@ -23,5 +27,11 @@ data class UserModel(
 
             }
     }
+
+    @Bindable
+    fun isMale() = gender == GenderEnum.MALE.gender
+
+    @Bindable
+    fun isActive() = status == StatusEnum.ACTIVE.status
 
 }

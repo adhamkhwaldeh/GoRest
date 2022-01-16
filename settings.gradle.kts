@@ -6,3 +6,5 @@ include(":network")
 include(":goRestRepository")
 include(":business")
 include(":dtos")
+include(":dataBindingValidationLibrary")
+

@@ -64,6 +64,10 @@ android {
     kapt {
         correctErrorTypes = true
     }
+//    hilt {
+//        enableAggregatingTask = true
+//    }
+    hilt.enableExperimentalClasspathAggregation = true
 
     //TODO: remove this after migration to Hilt
 //    javaCompileOptions {
