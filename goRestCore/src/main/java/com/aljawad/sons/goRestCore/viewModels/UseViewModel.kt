@@ -40,7 +40,6 @@ class UseViewModel @Inject constructor(
     )
 
     private var _payloadPointer = payload.value!!
-    var refreshWithFilter: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getUserList() = launchPagingAsync({
         userPagingRepository.getUserPageList(_payloadPointer)
@@ -65,6 +64,8 @@ class UseViewModel @Inject constructor(
     //endregion
 
     //region create user
+    var refreshWithCreate: MutableLiveData<Boolean> = MutableLiveData()
+
     private lateinit var _userCreateFlow: Flow<BaseState<UserModel>>
     val userCreateFlow: Flow<BaseState<UserModel>>
         get() = _userCreateFlow

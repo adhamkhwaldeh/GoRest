@@ -1,6 +1,8 @@
 package com.aljawad.sons.mainlibrary.states
 
 import com.aljawad.sons.dtos.response.BaseResponse
+import com.aljawad.sons.mainlibrary.models.ErrorMessage
+import com.google.gson.Gson
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -17,6 +19,7 @@ sealed class BaseState<out T> { //where T : Any
     class NotDataFound<T>() : BaseState<T>()
     class NoInternetError<T>() : BaseState<T>()
 
+    data class Conflict<T>(var message: String? = null) : BaseState<T>()
     data class InternalServerError<T>(var message: String? = null) : BaseState<T>()
     data class NoAuthorized<T>(var message: String? = null) : BaseState<T>()
 
@@ -27,20 +30,17 @@ sealed class BaseState<out T> { //where T : Any
             if (it is retrofit2.HttpException) {
                 val response = it.response()
                 val errorBody = response?.errorBody()
-//                val remoteMessage = Gson().fromJson(
-//                        response!!.errorBody()!!.charStream(),
-//                        ErrorMessage::class.java
-//                    )
-//                ErrorEntity.InternalServerError
-//
-//                    .apply { message = remoteMessage }
+                val result = Gson().fromJson(
+                    response!!.errorBody()!!.charStream(),
+                    ErrorMessage::class.java
+                )
 
-                val converter: Converter<ResponseBody, BaseResponse<*>>? =
-                    retrofit?.responseBodyConverter(
-                        BaseResponse::class.java,
-                        arrayOf()
-                    )
-                val result: BaseResponse<*>? = errorBody?.let { converter?.convert(it) }
+//                val converter: Converter<ResponseBody, BaseResponse<*>>? =
+//                    retrofit?.responseBodyConverter(
+//                        BaseResponse::class.java,
+//                        arrayOf()
+//                    )
+//                val result: BaseResponse<*>? = errorBody?.let { converter?.convert(it) }
 
                 return when (it.code()) {
                     HttpResponseCodeEnum.UN_AUTHORIZED.code -> {
@@ -48,6 +48,9 @@ sealed class BaseState<out T> { //where T : Any
                     }
                     HttpResponseCodeEnum.NO_DATA_FOUND.code -> {
                         NotDataFound() //result?.getErrorsCollections()?: ""
+                    }
+                    HttpResponseCodeEnum.CONFLICT_2.code -> {
+                        Conflict(result?.getErrorsCollections() ?: "")
                     }
                     HttpResponseCodeEnum.FORBIDDEN.code -> {
                         NoAuthorized(result?.getErrorsCollections() ?: "")

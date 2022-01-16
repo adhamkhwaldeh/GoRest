@@ -1,11 +1,13 @@
 package com.aljawad.sons.goRestCore
 
+import android.content.res.ColorStateList
 import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.aljawad.sons.dtos.enums.GenderEnum
 import com.aljawad.sons.dtos.enums.StatusEnum
+import com.aljawad.sons.mainlibrary.R
 
 object BindingHelper {
 
@@ -14,13 +16,26 @@ object BindingHelper {
     fun userGender(imageView: ImageView?, gender: String?) {
         try {
             imageView?.let {
+                val context = it.context
                 gender?.let { innerIt ->
                     when (innerIt) {
                         GenderEnum.MALE.gender -> {
-                            it.setImageResource(android.R.drawable.ic_menu_sort_alphabetically)
+                            it.setImageResource(R.drawable.ic_male)
+                            imageView.setColorFilter(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.male
+                                ), android.graphics.PorterDuff.Mode.MULTIPLY
+                            )
                         }
                         GenderEnum.FEMALE.gender -> {
-                            it.setImageResource(android.R.drawable.presence_offline)
+                            it.setImageResource(R.drawable.ic_female)
+                            imageView.setColorFilter(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.female
+                                ), android.graphics.PorterDuff.Mode.MULTIPLY
+                            )
                         }
                         else -> {
 

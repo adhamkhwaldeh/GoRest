@@ -1,6 +1,8 @@
 package com.aljawad.sons.goRestCore.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.DisplayMetrics
 import android.view.*
 import androidx.fragment.app.DialogFragment
@@ -13,7 +15,7 @@ import com.aljawad.sons.dtos.models.UserModel
 import com.aljawad.sons.goRestCore.R
 import com.aljawad.sons.goRestCore.databinding.DialogCreateUserBinding
 import com.aljawad.sons.goRestCore.viewModels.UseViewModel
-import com.aljawad.sons.mainlibrary.base.BaseDialogFragment
+import com.aljawad.sons.mainlibrary.dialogs.ProgressDialog
 import com.aljawad.sons.mainlibrary.states.BaseState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +28,10 @@ class CreateUserDialog : DialogFragment() {
     }
 
     lateinit var binding: DialogCreateUserBinding
+
+    private val progressDialog: ProgressDialog by lazy {
+        ProgressDialog.newInstance(message = getString(R.string.creatingANewUser))
+    }
 
     private val userViewModel: UseViewModel by activityViewModels()
 
@@ -44,29 +50,46 @@ class CreateUserDialog : DialogFragment() {
             userViewModel.userCreateFlow.collect {
                 when (it) {
                     is BaseState.Loading -> {
+                        progressDialog.showDialog(childFragmentManager)
                     }
                     is BaseState.LoadingDismiss -> {
-
+                        ProgressDialog.closeDialog(childFragmentManager)
                     }
                     is BaseState.InternalServerError -> {
-
+                        Snackbar.make(
+                            binding.root,
+                            it.message ?: getText(R.string.unexpectedErrorHappened),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                     is BaseState.NoAuthorized -> {
-
+                        Snackbar.make(
+                            binding.root,
+                            getText(R.string.unAuthorized),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                     is BaseState.NoInternetError -> {
-
+                        Snackbar.make(
+                            binding.root,
+                            getText(R.string.checkYourInternetConnection),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                    is BaseState.Conflict -> {
+                        Snackbar.make(
+                            binding.root,
+                            it.message ?: getText(R.string.dataIssue),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                     is BaseState.NotDataFound -> {
 
                     }
                     is BaseState.FeaturedState -> {
-                        Snackbar.make(
-                            binding.root,
-                            getText(R.string.userHasBeenDeletedSuccessfully),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-
+                        userViewModel.refreshWithCreate.value =
+                            !(userViewModel.refreshWithCreate.value ?: false)
+                        dismissAllowingStateLoss()
                     }
                 }
 

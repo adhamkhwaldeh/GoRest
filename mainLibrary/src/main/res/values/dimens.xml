@@ -176,4 +176,9 @@
     <dimen name="imageHeight_md_x">@dimen/_64sdp</dimen>
 
 
+    <dimen name="progress_wheel_width">@dimen/_64sdp</dimen>
+    <dimen name="progress_wheel_height">@dimen/_64sdp</dimen>
+
+
+
 </resources>

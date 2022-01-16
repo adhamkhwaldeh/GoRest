@@ -11,7 +11,7 @@ data class UserModel(
     var name: String? = "",
     var email: String? = "",
     var gender: String? = GenderEnum.MALE.gender,
-    var status: String? = "",
+    var status: String? = StatusEnum.ACTIVE.status,
 ) : BaseObservable() {
 
     companion object {

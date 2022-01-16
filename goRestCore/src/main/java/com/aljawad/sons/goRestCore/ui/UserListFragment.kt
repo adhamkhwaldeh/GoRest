@@ -15,6 +15,7 @@ import com.aljawad.sons.goRestCore.viewModels.UseViewModel
 import com.aljawad.sons.goRestCore.adapters.UserPagingAdapter
 import com.aljawad.sons.goRestCore.databinding.FragmentUserListBinding
 import com.aljawad.sons.gorestrepository.paging.adapters.PagingLoadStateAdapter
+import com.aljawad.sons.mainlibrary.dialogs.ProgressDialog
 import com.aljawad.sons.mainlibrary.extensions.launchOnLifecycleScope
 import com.aljawad.sons.mainlibrary.extensions.observe
 import com.aljawad.sons.mainlibrary.states.BaseState
@@ -57,6 +58,10 @@ class UserListFragment : Fragment() {
 
     private lateinit var binding: FragmentUserListBinding
 
+    private val progressDialog: ProgressDialog by lazy {
+        ProgressDialog.newInstance(message = getString(R.string.deleteUser))
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,8 +78,13 @@ class UserListFragment : Fragment() {
 
         bindVM()
 
-        observe(userViewModel.refreshWithFilter) {
-           userAdapter.refresh()
+        observe(userViewModel.refreshWithCreate) {
+            userAdapter.refresh()
+            Snackbar.make(
+                binding.root,
+                getText(R.string.userHasBeenCreatedSuccessfully),
+                Snackbar.LENGTH_LONG
+            ).show()
         }
 
     }
@@ -84,18 +94,38 @@ class UserListFragment : Fragment() {
             userViewModel.userDeleteFlow.collect {
                 when (it) {
                     is BaseState.Loading -> {
+                        progressDialog.showDialog(childFragmentManager)
                     }
                     is BaseState.LoadingDismiss -> {
-
+                        ProgressDialog.closeDialog(childFragmentManager)
                     }
                     is BaseState.InternalServerError -> {
-
+                        Snackbar.make(
+                            binding.root,
+                            it.message ?: getText(R.string.unexpectedErrorHappened),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                     is BaseState.NoAuthorized -> {
-
+                        Snackbar.make(
+                            binding.root,
+                            getText(R.string.unAuthorized),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                     is BaseState.NoInternetError -> {
-
+                        Snackbar.make(
+                            binding.root,
+                            getText(R.string.checkYourInternetConnection),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                    is BaseState.Conflict -> {
+                        Snackbar.make(
+                            binding.root,
+                            it.message ?: getText(R.string.dataIssue),
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                     is BaseState.NotDataFound -> {
 

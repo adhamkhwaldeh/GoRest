@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
+    <string name="first_fragment_label">User List</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
@@ -25,5 +25,12 @@
     <string name="female">Female</string>
     <string name="active">Active</string>
     <string name="inActive">InActive</string>
+    <string name="creatingANewUser">Creating a new user</string>
+    <string name="deleteUser">Delete user</string>
+    <string name="userHasBeenCreatedSuccessfully">User has been created successfully</string>
+    <string name="unexpectedErrorHappened">Unexpected error happened</string>
+    <string name="unAuthorized">Unauthorized</string>
+    <string name="checkYourInternetConnection">Check your internet connection</string>
+    <string name="dataIssue">Data issue</string>
 
 </resources>
