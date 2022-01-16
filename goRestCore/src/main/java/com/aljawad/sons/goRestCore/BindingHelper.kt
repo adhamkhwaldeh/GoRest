@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
 import com.aljawad.sons.dtos.enums.GenderEnum
 import com.aljawad.sons.dtos.enums.StatusEnum
@@ -20,22 +21,31 @@ object BindingHelper {
                 gender?.let { innerIt ->
                     when (innerIt) {
                         GenderEnum.MALE.gender -> {
+//                            it.setColorFilter(
+//                                ContextCompat.getColor(
+//                                    context,
+//                                    R.color.male
+//                                ), android.graphics.PorterDuff.Mode.MULTIPLY
+//                            )
                             it.setImageResource(R.drawable.ic_male)
-                            imageView.setColorFilter(
-                                ContextCompat.getColor(
-                                    context,
-                                    R.color.male
-                                ), android.graphics.PorterDuff.Mode.MULTIPLY
+                            DrawableCompat.setTint(
+                                DrawableCompat.wrap(it.drawable),
+                                ContextCompat.getColor(context, R.color.male)
                             )
                         }
                         GenderEnum.FEMALE.gender -> {
+//                            it.setColorFilter(
+//                                ContextCompat.getColor(
+//                                    context,
+//                                    R.color.female
+//                                ), android.graphics.PorterDuff.Mode.MULTIPLY
+//                            )
                             it.setImageResource(R.drawable.ic_female)
-                            imageView.setColorFilter(
-                                ContextCompat.getColor(
-                                    context,
-                                    R.color.female
-                                ), android.graphics.PorterDuff.Mode.MULTIPLY
+                            DrawableCompat.setTint(
+                                DrawableCompat.wrap(it.drawable),
+                                ContextCompat.getColor(context, R.color.female)
                             )
+
                         }
                         else -> {
 
