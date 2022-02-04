@@ -1,5 +1,6 @@
 package com.aljawad.sons.goRestCore.viewModels
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -10,8 +11,10 @@ import com.aljawad.sons.business.DeleteUserUseCase
 import com.aljawad.sons.dtos.models.UserModel
 import com.aljawad.sons.gorestrepository.paging.PagingParamConfig
 import com.aljawad.sons.gorestrepository.repositories.UserPagingRepository
+import com.aljawad.sons.mainlibrary.base.BaseViewModel
 import com.aljawad.sons.mainlibrary.states.BaseState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -23,11 +26,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UseViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val userPagingRepository: UserPagingRepository,
     private val createUserUseCase: CreateUserUseCase,
     private val deleteUserUseCase: DeleteUserUseCase,
     private val handle: SavedStateHandle
-) : com.aljawad.sons.mainlibrary.base.BaseViewModel() {
+) : BaseViewModel() {
 
     //region users paging
     private lateinit var _usersFlow: Flow<PagingData<UserModel>>

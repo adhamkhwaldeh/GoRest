@@ -1,6 +1,5 @@
 package com.aljawad.sons.mainlibrary.states
 
-import com.aljawad.sons.dtos.response.BaseResponse
 import com.aljawad.sons.mainlibrary.models.ErrorMessage
 import com.google.gson.Gson
 import okhttp3.ResponseBody
