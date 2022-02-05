@@ -50,10 +50,10 @@ In this module we are presenting the applications main functionality where we ar
 ###### Purpose
 1. Display user list
 2. Create user
-3. Delete user
+3. Home screen
 
 ## goRestRepository
-This module contains footballMatch Repo layer to fetch data from any source either remote or local dat source based on network availability
+This module contains Users Repo layer to fetch data from any source either remote or local dat source based on network availability
 ###### Purpose
 1. populating business module
 
