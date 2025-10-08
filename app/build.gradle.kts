@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion(AppConfig.compileSdk)
-    buildToolsVersion(AppConfig.buildToolsVersion)
+    compileSdk = AppConfig.compileSdk
+    buildToolsVersion = AppConfig.buildToolsVersion
 
     defaultConfig {
         applicationId = "com.aljawad.sons.gorest"
-        minSdkVersion(AppConfig.minSdk)
-        targetSdkVersion(AppConfig.compileSdk)
-        versionCode(AppConfig.versionCode)
-        versionName(AppConfig.versionName)
+        minSdk = AppConfig.minSdk
+        targetSdk = AppConfig.compileSdk
+        versionCode = AppConfig.versionCode
+        versionName = AppConfig.versionName
         multiDexEnabled = true
 
         //TODO: remove this after migration to Hilt
@@ -34,15 +34,18 @@ android {
         }
 
         getByName("debug") {
-            applicationIdSuffix(".debug")
+//            applicationIdSuffix(".debug")
+            applicationIdSuffix = ".debug"
         }
 
         create("production") {
-            applicationIdSuffix(".prod")
+//            applicationIdSuffix(".prod")
+            applicationIdSuffix = ".prod"
         }
 
         create("development") {
-            applicationIdSuffix(".dev")
+//            applicationIdSuffix(".dev")
+            applicationIdSuffix = ".dev"
         }
 
     }

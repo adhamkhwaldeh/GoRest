@@ -1,7 +1,7 @@
 //version constants for the Kotlin DSL dependencies
 object Versions {
     //app level
-    const val gradle = "7.0.0-alpha03"
+    const val gradle = "7.0.4"
     const val kotlin = "1.4.32"
     const val nav_version = "2.3.4"
 
@@ -23,7 +23,7 @@ object Versions {
     const val kotlinSerialization = "1.1.0"
     const val paging = "3.1.0"
 
-    const val daggerHiltAndroid = "2.31-alpha"
+    const val daggerHiltAndroid = "2.38.1" //"2.31-alpha"//2.37
     const val daggerHilt = "1.0.0-alpha03"
 
 

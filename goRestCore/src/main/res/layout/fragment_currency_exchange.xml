@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="currencyPostModel"
+            type="com.aljawad.sons.dtos.post.CurrencyPostModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_Md"
+        android:padding="@dimen/padding_Md"
+        app:cardBackgroundColor="@color/white"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstCurrencyTextField"
+                style="@style/Theme.GoRest.EditText.OutlinedRoundedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_Md"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!--            android:textAppearance="@style/AppTheme.MediumTextAppearance.Black"-->
+                <!--            android:textColorHint="@color/colorGrey"-->
+                <!--            android:layout_margin="@dimen/margin_Md"-->
+                <!--            android:minHeight="@dimen/layout_text_view_height"-->
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/firstCurrencyEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start|center_vertical"
+                    android:hint="@string/name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="@={currencyPostModel.firstCurrency}"
+                    android:textAlignment="viewStart"
+                    android:textStyle="bold"
+                    app:validateEmpty="@{true}"
+                    app:validateEmptyAutoDismiss="@{true}"
+                    app:validateEmptyMessage="@{@string/user_name_could_not_be_empty}"
+                    app:validateMinLength="@{5}"
+                    app:validateMinLengthAutoDismiss="@{true}"
+                    app:validateMinLengthMessage="@{@string/username_length_check}"
+                    tools:text="@string/name" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/secondCurrencyField"
+                style="@style/Theme.GoRest.EditText.OutlinedRoundedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_Md"
+                app:layout_constraintStart_toStartOf="@+id/userNameTextField"
+                app:layout_constraintTop_toBottomOf="@+id/firstCurrencyTextField"
+                app:passwordToggleEnabled="false">
+
+                <!--            android:textAppearance="@style/AppTheme.MediumTextAppearance.Black"-->
+                <!--            android:textColorHint="@color/colorGrey"-->
+                <!--            android:padding="@dimen/padding_smMd"-->
+                <!--            android:background="@color/transparent"-->
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/secondCurrencyEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start|center_vertical"
+                    android:hint="@string/email"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:text="@={currencyPostModel.secondCurrency}"
+                    android:textAlignment="viewStart"
+                    android:textStyle="bold"
+                    app:validateEmpty="@{true}"
+                    app:validateEmptyAutoDismiss="@{true}"
+                    app:validateEmptyMessage="@{@string/email_could_not_be_empty}"
+                    app:validateRegex="@{Patterns.EMAIL_ADDRESS.toString()}"
+                    app:validateRegexAutoDismiss="@{true}"
+                    app:validateRegexMessage="@{@string/incorrect_email_address}"
+                    tools:text="@string/email" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rateField"
+                style="@style/Theme.GoRest.EditText.OutlinedRoundedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_Md"
+                app:layout_constraintTop_toBottomOf="@+id/secondCurrencyField"
+                app:passwordToggleEnabled="false">
+
+                <!--            android:textAppearance="@style/AppTheme.MediumTextAppearance.Black"-->
+                <!--            android:textColorHint="@color/colorGrey"-->
+                <!--            android:padding="@dimen/padding_smMd"-->
+                <!--            android:background="@color/transparent"-->
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/rateEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start|center_vertical"
+                    android:hint="@string/email"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:text="@={currencyPostModel.rate}"
+                    android:textAlignment="viewStart"
+                    android:textStyle="bold"
+                    app:validateEmpty="@{true}"
+                    app:validateEmptyAutoDismiss="@{true}"
+                    app:validateEmptyMessage="@{@string/email_could_not_be_empty}"
+                    app:validateRegex="@{Patterns.EMAIL_ADDRESS.toString()}"
+                    app:validateRegexAutoDismiss="@{true}"
+                    app:validateRegexMessage="@{@string/incorrect_email_address}"
+                    tools:text="@string/email" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/calculateBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_Md"
+                android:backgroundTint="@color/primaryTextColor"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/rateField" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
